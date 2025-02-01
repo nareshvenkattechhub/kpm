@@ -1,0 +1,48 @@
+import { useState } from "react";
+import { Container, Form, Button, Card } from "react-bootstrap";
+
+export default function RegisterForm() {
+  const [formData, setFormData] = useState({ username: "", password: "" });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Register Data", formData);
+  };
+
+  return (
+    <Container className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <Card className="p-4" style={{ width: "350px", background: "#f8f9fa", borderRadius: "10px" }}>
+        <h3 className="text-center">Register</h3>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" className="w-100">
+            Register
+          </Button>
+        </Form>
+      </Card>
+    </Container>
+  );
+}
