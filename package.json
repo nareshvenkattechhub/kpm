@@ -12,7 +12,7 @@
     "deploy": "gh-pages -d dist"
   },
 
-"homepage": "https://nareshvenkattechhub.github.io/Kpmpp.com/",
+"homepage": "https://github.com/nareshvenkattechhub/kpmpp.git",
 
 
   "dependencies": {

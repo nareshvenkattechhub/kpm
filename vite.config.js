@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-const repoName = 'Kpmpp.com' // Your GitHub repository name
+const repoName = 'Kpmpp' // Your GitHub repository name
 
 export default defineConfig({
   plugins: [react()],
