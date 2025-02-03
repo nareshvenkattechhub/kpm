@@ -8,8 +8,8 @@ import Home from './pages/Home';
 import Dashboard from './pages/Userdashboard';
 
 // Login or Logout
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+//import Login from './pages/Login';
+//import Signup from './pages/Signup';
 
 // Organization routes
 import President from './organization/President';
@@ -31,6 +31,21 @@ import Organization from './components/Organization';
 import Objectives from './pages/Objectives';
 
 
+import ComplaintForm from './pages/Complaintpage';
+
+
+
+
+
+
+//admin authentication
+import AuthForm from './pages/Userauthentication';
+
+//admin 
+import AdminAuth from './pages/Admin';   //authentication
+
+import AdminDashboard from './pages/Admindashboard';  //admin panel dashboard
+
 
 function App() {
   return (
@@ -51,8 +66,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Authentication routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/join" element={<Signup />} />
+        <Route path="/join" element={<AuthForm />} />
 
         {/* Organization routes */}
         <Route path="/president" element={<President />} />
@@ -67,9 +81,20 @@ function App() {
 
 
 
+
+
         {/* Media route */}
         
         <Route path="/objectives" element={<Objectives />} />
+
+
+
+        <Route path="/complaints" element={<ComplaintForm />} />
+
+        <Route path="/admindashboard" element={<AdminDashboard />} />
+
+        <Route path="/adminauth" element={<AdminAuth />} />
+
 
 
       </Routes>

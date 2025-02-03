@@ -32,7 +32,9 @@ const Navigation = () => {
             <Nav.Link href="/about" className="text-light fs-3">About</Nav.Link>
             <Nav.Link href="/organization" className="text-light fs-3">Organization</Nav.Link>
             <Nav.Link href="/media" className="text-light fs-3">Media</Nav.Link>
-            <Nav.Link href="/login" className="text-light fs-3">Login</Nav.Link>
+            
+            <Nav.Link href="/adminauth" className="text-light fs-3">admin</Nav.Link>
+
           </Nav>
 
 

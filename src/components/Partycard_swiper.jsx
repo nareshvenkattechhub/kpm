@@ -6,8 +6,16 @@ import "swiper/css/autoplay";
 import { Pagination, Autoplay } from "swiper/modules";
 
 const cardBackgroundColors = [
-  "#f0f8ff", "#faebd7", "#f5f5dc", "#ffe4e1", "#e6e6fa",
-  "#f0ffff", "#f5f5f5", "#fff0f5", "#fffaf0", "#e0ffff"
+  "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+  "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)",
+  "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+  "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
+  "linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)",
+  "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+  "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
+  "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+  "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+  "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)"
 ];
 
 const translations = [
@@ -44,24 +52,23 @@ function Partycard_swiper() {
           <div
             className="card shadow-lg border-0 h-100 text-center"
             style={{
-              background: `linear-gradient(to right, ${cardBackgroundColors[i % cardBackgroundColors.length]}, #ffffff)`,
-              borderRadius: "15px",
+              background: cardBackgroundColors[i % cardBackgroundColors.length],
+              borderRadius: "30px",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               padding: "20px"
             }}
           >
             <div className="card-body d-flex flex-column align-items-center justify-content-between">
-              {/* Party Name inside a Circular Badge */}
               <div
                 className="mb-3 d-flex align-items-center justify-content-center"
                 style={{
-                  width: "100px",
-                  height: "100px",
-                  backgroundColor: "#007bff",
+                  width: "20vh",
+                  height: "6vh",
+                  backgroundColor: "blue",
                   color: "white",
-                  fontSize: "22px",
+                  fontSize: "4vh",
                   fontWeight: "bold",
-                  borderRadius: "50%",
+                  borderRadius: "30%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -70,14 +77,12 @@ function Partycard_swiper() {
               >
                 {item.partyName}
               </div>
-
-              <h5 className="card-subtitle fs-5 text-muted">{item.slogan}</h5>
-              
+              <h5 className="card-subtitle fs-3 fw-bold text-muted">{item.slogan}</h5>
               <a
                 href="/join"
-                className="btn btn-primary btn-lg mt-3 px-4"
+                className="btn btn-success btn-lg mt-3 px-4"
                 style={{
-                  fontSize: "16px",
+                  fontSize: "4vh",
                   fontWeight: "bold",
                   borderRadius: "25px",
                   transition: "background 0.3s ease"

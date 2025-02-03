@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaFacebook, FaTwitter, FaWhatsapp, FaDownload, FaShare } from "react-icons/fa";
@@ -6,7 +6,15 @@ import { FaFacebook, FaTwitter, FaWhatsapp, FaDownload, FaShare } from "react-ic
 const Dashboard = () => {
   const [image, setImage] = useState(null);
   const [showShare, setShowShare] = useState(false);
+  const [username, setUsername] = useState("Guest");
   const cardRef = useRef(null);
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -20,7 +28,7 @@ const Dashboard = () => {
   };
 
   const handleDownload = () => {
-    html2canvas(cardRef.current).then((canvas) => {
+    html2canvas(cardRef.current, { scale: 2 }).then((canvas) => {
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
       link.download = "membership_card.png";
@@ -29,46 +37,139 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container my-5">
-      <div className="row text-white text-center mb-4">
-        <div className="col-md-4">
-          <div className="p-4 rounded bg-danger shadow-lg">
-            <h4 className="fs-1">Dash Board</h4>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="p-4 rounded bg-info shadow-lg">
-            <h4 className="fs-1">Contribute</h4>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="p-4 rounded bg-success shadow-lg">
-            <h4 className="fs-1">Membership</h4>
-          </div>
-        </div>
+    <div
+      className="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center"
+      style={{ background: "linear-gradient(135deg, #1e3c72, #2a5298)", padding: "20px" }}
+    >
+      {/* Greeting Card */}
+      <div
+        className="card text-dark text-center fs-3 shadow-lg mb-4"
+        style={{
+          background: "linear-gradient(135deg, #ff9a9e, #fad0c4)",
+          width: "70vh",
+          padding: "20px",
+          borderRadius: "15px",
+
+          fontSize:"20px"
+        }}
+      >
+        <h2>Hello, {username} Welcome to Karshaka Praja Margh!</h2>
       </div>
 
-      <div className="row mt-5 align-items-center">
+      {/* Upload & Membership Cards */}
+      <div className="row mt-3 align-items-center w-75">
+        {/* Image Upload Card */}
         <div className="col-lg-4 d-flex flex-column align-items-center">
-          <label className="mb-2 fw-bold">Upload Image</label>
-          <input type="file" className="form-control btn btn-warning" accept="image/*" onChange={handleImageUpload} />
+          <div
+            className="card border-0 shadow-lg d-flex flex-column align-items-center justify-content-center"
+            style={{
+              width: "130mm",
+              height: "80mm",
+              fontSize: "14px",
+              borderRadius: "10px",
+              padding: "8px",
+              background: "#343a40",
+              color: "yellow",
+            }}
+          >
+            {/* Display uploaded image OR default KPM logo */}
+            {image ? (
+              <img
+                src={image}
+                alt="Uploaded Preview"
+                className="rounded border mt-2"
+                style={{ width: "100px", height: "100px", objectFit: "cover", border: "2px solid #ccc" }}
+              />
+            ) : (
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  borderRadius: "50%",
+                  backgroundColor: "#ffcc00",
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "24px",
+                  textAlign: "center",
+                  border: "3px solid white",
+                }}
+              >
+                KPM
+              </div>
+            )}
+          </div>
+          {/* Choose Image Button - Below Upload Card */}
+          <input type="file" className="btn btn-warning mt-3" accept="image/*" onChange={handleImageUpload} />
         </div>
 
-        <div className="col-lg-8 d-flex justify-content-center">
-          <div ref={cardRef} className="card border-0 shadow-lg" style={{ width: "130mm", height: "80mm", fontSize: "14px", borderRadius: "10px", padding: "8px" }}>
+        {/* Membership Card */}
+        <div className="col-lg-8 d-flex flex-column align-items-center">
+          <div
+            ref={cardRef}
+            className="card border-0 shadow-lg"
+            style={{
+              width: "130mm",
+              height: "80mm",
+              fontSize: "14px",
+              borderRadius: "10px",
+              padding: "8px",
+              background: "linear-gradient(135deg, #1f4037, #99f2c8)",
+            }}
+          >
             {!showShare ? (
               <>
-                <div className="card-header text-center text-white py-2" style={{ background: "#6c757d" }}>
-                  <h5 className="mb-0 fs-2">KPM Membership</h5>
+                <div
+                  className="card-header text-center text-white py-2"
+                  style={{
+                    background: "linear-gradient(135deg, #ff9a9e, #fad0c4)",
+                  }}
+                >
+                  <h5 className="mb-0 fs-1 ">KPM Membership</h5>
                 </div>
                 <div className="card-body d-flex align-items-center p-3">
                   <div className="me-3">
-                    <img src={image || "kpm.png"} alt="Member" className="rounded border" style={{ width: "100px", height: "100px", objectFit: "cover", border: "2px solid #ccc" }} />
+                    {image ? (
+                      <img
+                        src={image}
+                        alt="Member"
+                        className="rounded border"
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover",
+                          border: "2px solid #ccc",
+                        }}
+                      />
+                    ) : (
+                      <div
+                        className="d-flex justify-content-center align-items-center"
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          borderRadius: "50%",
+                          backgroundColor: "#ffcc00",
+                          color: "black",
+                          fontWeight: "bold",
+                          fontSize: "24px",
+                          textAlign: "center",
+                          border: "3px solid white",
+                        }}
+                      >
+                        KPM
+                      </div>
+                    )}
                   </div>
                   <div className="d-flex flex-column">
-                    <p className="mb-2 fw-bold text-dark fs-3"><span className="text-primary">Name:</span> John Doe</p>
-                    <p className="mb-2 fw-bold text-dark fs-3"><span className="text-primary">Pincode:</span> 123456</p>
-                    <p className="mb-0 fw-bold text-dark fs-3"><span className="text-primary">Member ID:</span> 78910</p>
+                    <p className="mb-2 fw-bold text-dark fs-3">
+                      <span className="text-dark">Name:</span> {username}
+                    </p>
+                    <p className="mb-2 fw-bold text-dark fs-3">
+                      <span className="text-primary">Pincode:</span> 123456
+                    </p>
+                    <p className="mb-0 fw-bold text-dark fs-3">
+                      <span className="text-primary">Member ID:</span> 78910
+                    </p>
                   </div>
                 </div>
               </>
@@ -80,16 +181,39 @@ const Dashboard = () => {
               </div>
             )}
           </div>
-        </div>
-      </div>
 
-      <div className="text-center mt-4">
-        <button className="btn btn-primary mx-2" onClick={() => setShowShare(!showShare)}>
-          <FaShare /> {showShare ? "Back to Card" : "Share"}
-        </button>
-        <button className="btn btn-success mx-2" onClick={handleDownload}>
-          <FaDownload /> Download
-        </button>
+          {/* Action Buttons - Below Membership Card */}
+          <div className="mt-3">
+            <button
+              className="btn mx-2"
+              onClick={() => setShowShare(!showShare)}
+              style={{
+                background: "linear-gradient(135deg, #ff7b7b, #ff4d6d)",
+                color: "white",
+                fontSize: "18px",
+                borderRadius: "10px",
+                padding: "10px 20px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+              }}
+            >
+              <FaShare /> {showShare ? "Back to Card" : "Share"}
+            </button>
+            <button
+              className="btn mx-2"
+              onClick={handleDownload}
+              style={{
+                background: "linear-gradient(135deg, #61c0bf, #00b8a9)",
+                color: "white",
+                fontSize: "18px",
+                borderRadius: "10px",
+                padding: "10px 20px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+              }}
+            >
+              <FaDownload /> Download
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

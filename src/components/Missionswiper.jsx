@@ -6,6 +6,10 @@ import "swiper/css/autoplay";
 import { Pagination, Autoplay } from "swiper/modules";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { Button } from "react-bootstrap";
+
+import "../App.css";
+
 const missionData = [
   {
     title: "Food",
@@ -51,92 +55,137 @@ const missionData = [
 
 function MissionSwiper() {
   return (
-    <section className="container-fluid my-5">
-      <h2 className="text-center fw-bold text-warning" style={{ fontSize: "60px", marginBottom: "30px" }}>
-        Our Mission
-      </h2>
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={3}
-        breakpoints={{
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 4},
-        }}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
-        modules={[Pagination, Autoplay]}
-        className="py-4"
+    <div className="missions-container" style={{ height: "70vh",}}>
+      <section
+        className="container-fluid bg-dark mt-2 my-5 py-4"
+        style={{ height: "70vh", position: "relative" }}
       >
-        {missionData.map((item, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className="card shadow-lg text-center p-4"
-              style={{
-                background: item.cardGradient,
-                minHeight: "350px", // Reduced card height
-                maxHeight: "400px",
-                borderRadius: "15px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                boxShadow: "0 10px 15px rgba(0, 0, 0, 0.2)",
-              }}
-            >
-              <div className="card-body d-flex flex-column">
-                {/* Title Section with Gradient */}
-                <div
-                  className="ms-3 d-flex align-items-center justify-content-center"
-                  style={{
-                    width: "240px",
-                    height: "55px",
-                    background: item.titleGradient,
-                    color: "black",
-                    fontSize: "22px",
-                    fontWeight: "bold",
-                    borderRadius: "20px",
-                    textAlign: "center",
-                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                    marginBottom: "20px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  {item.title}
+        <div
+          className="text-center mt-4 fw-bold text-light py-3 px-4 mx-auto"
+          style={{
+            maxWidth: "80vh",
+            background: "linear-gradient(135deg, #1e3c72, #2a5298)",
+            borderRadius: "50%",
+            fontSize: "2.5rem",
+            boxShadow: "0 4px 10px rgba(0, 1, 1, 0.2)",
+          }}
+        >
+          Our Mission
+        </div>
+        <Swiper
+          spaceBetween={20}
+          slidesPerView={3}
+          breakpoints={{
+            768: { slidesPerView: 1 },
+            1024: { slidesPerView: 3 },
+          }}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000 }}
+          modules={[Pagination, Autoplay]}
+          className="py-4"
+          style={{ height: "90%" }}
+        >
+          {missionData.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div
+                className="card shadow-lg text-center p-4"
+                style={{
+                  background: item.cardGradient,
+              
+                  height:"40vh",
+                  borderRadius: "8vh",
+                  marginLeft:"5vh",
+                  marginTop:"3vh",
+                  display: "flex",
+                  width:"50vh",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  boxShadow: "0 10px 15px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                <div className="card-body  d-flex flex-column">
+                  <div
+                    className="ms-3 d-flex align-items-center justify-content-center"
+                    style={{
+                      width: "30vh",
+                      height: "10vh",
+                      background: item.titleGradient,
+                      color: "black",
+                      fontSize: "3vh",
+                      fontWeight: "bold",
+                      borderRadius: "20px",
+                      textAlign: "center",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      marginBottom: "20px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {item.title}
+                  </div>
+                  <p
+                    className="card-text fs-5 text-dark fw-bold"
+                    style={{ lineHeight: "40px", fontWeight: "400" }}
+                  >
+                    {item.description}
+                  </p>
+                  <button
+                    className="btn btn-light mt-auto fs-5 py-2 px-4"
+                    style={{
+                      background: item.buttonGradient,
+                      color: "white",
+                      fontWeight: "bold",
+                      borderRadius: "25px",
+                      height:"7vh",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      transition: "background 0.3s ease, transform 0.3s ease",
+                      padding: "12px 30px",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = "scale(1.2)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = "scale(1)";
+                    }}
+                  >
+                    Learn More
+                  </button>
                 </div>
-
-                {/* Description */}
-                <p className="card-text fs-5 text-light" style={{ lineHeight: "40px", fontWeight: "400" }}>
-                  {item.description}
-                </p>
-
-                {/* Styled Button */}
-                <button
-                  className="btn btn-light mt-auto fs-5 py-2 px-4"
-                  style={{
-                    background: item.buttonGradient,
-                    color: "white",
-                    fontWeight: "bold",
-                    borderRadius: "25px",
-                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                    transition: "background 0.3s ease, transform 0.3s ease",
-                    padding: "12px 30px",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = "scale(1.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = "scale(1)";
-                  }}
-                >
-                  Learn More
-                </button>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </section>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        
+        {/* Centered "View All" Button */}
+        <Button
+          className="btn text-black missionviewall fs-3 btn-light"
+          style={{
+            background: "linear-gradient(135deg, #43e97b, #38f9d7)", // Green-Turquoise gradient
+            color: "white",
+            borderRadius: "25px",
+            marginLeft:"90vh",
+
+            padding: "12px 30px",
+            fontWeight: "bold",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            
+            bottom: "20px", // Adjusted position
+            left: "50%",
+            transform: "translateX(-50%)",
+            transition: "background 0.3s ease, transform 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = "scale(1.05)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = "scale(1)";
+          }}
+        >
+          View All
+        </Button>
+      </section>
+    </div>
   );
 }
 

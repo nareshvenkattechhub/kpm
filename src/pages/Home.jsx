@@ -34,8 +34,7 @@ import Organization from "../components/Organization";
 
 import MissionSwiper from "../components/Missionswiper";
 
-import VoiceYourConcerns from "./Complaint";
-
+import VoiceYourConcerns from "../components/Complaint";
 
 import Footer from "../components/Footer";
 
@@ -62,11 +61,11 @@ function Homepage(){
         <MissionSwiper/>
 
 
-       <div className="gaps"> </div>
+        <div className="" style={{marginTop:"20vh"}}> </div>
 
 
         <Organization/>
-        <div className="gaps"> </div>
+        <div className="" style={{marginTop:"7vh"}}> </div>
 
 
         <VoiceYourConcerns/>
